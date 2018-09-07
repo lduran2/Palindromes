@@ -22,7 +22,7 @@ public class ReverseCharSequenceIterator implements ICharIterator {
 	}
 
 	public boolean isValid() {
-		return this.index <= 0;
+		return this.index >= 0;
 	}
 
 }
