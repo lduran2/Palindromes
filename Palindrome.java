@@ -14,15 +14,20 @@ public enum Palindrome {
 	public static boolean isPalindrome(final CharSequence cs) {
 		final ICharIterator LEFT;
 		final ICharIterator RIGHT;
-		LEFT = new FilteredCharIterator(
-			new CharSequenceIterator(cs),
-			(c) -> Character.isLetter(c)
+		LEFT = new MappedCharToCharIterator(
+			new FilteredCharIterator(
+				new CharSequenceIterator(cs),
+				(c) -> Character.isLetter(c)
+			),
+			(c) -> Character.toLowerCase(c)
 		);
-		RIGHT = new FilteredCharIterator(
-			new ReverseCharSequenceIterator(cs),
-			(c) -> Character.isLetter(c)
+		RIGHT = new MappedCharToCharIterator(
+			new FilteredCharIterator(
+				new ReverseCharSequenceIterator(cs),
+				(c) -> Character.isLetter(c)
+			),
+			(c) -> Character.toLowerCase(c)
 		);
-		;
 		return isPalindrome(LEFT, RIGHT);
 	}
 
