@@ -12,15 +12,28 @@ public enum Palindrome {
 	}
 
 	public static boolean isPalindrome(final CharSequence cs) {
-		final ICharIterator LEFT = new CharSequenceIterator(cs);
-		final ICharIterator RIGHT = new ReverseCharSequenceIterator(cs);
+		final ICharIterator LEFT;
+		final ICharIterator RIGHT;
+		LEFT = new FilteredCharIterator(
+			new CharSequenceIterator(cs),
+			(c) -> Character.isLetter(c)
+		);
+		RIGHT = new FilteredCharIterator(
+			new ReverseCharSequenceIterator(cs),
+			(c) -> Character.isLetter(c)
+		);
+		;
 		return isPalindrome(LEFT, RIGHT);
 	}
 
 	public static boolean isPalindrome(final ICharIterator left, final ICharIterator right) {
 		boolean isSearching = true;
 
-		for (; isSearching && (left.Index() <= right.Index()); left.Next(), right.Next()) {
+		for (;
+			isSearching && left.isValid() && right.isValid()
+				&& (left.Index() <= right.Index());
+			left.Next(), right.Next()
+		) {
 			System.out.println(left.Index() + "," + right.Index());
 			System.out.println(left.Current() + "," + right.Current());
 			if (left.Current() != right.Current()) {
