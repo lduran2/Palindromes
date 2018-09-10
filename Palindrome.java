@@ -12,36 +12,30 @@ public enum Palindrome {
 	}
 
 	public static boolean isPalindrome(final CharSequence cs) {
-		final ICharIterator LEFT;
-		final ICharIterator RIGHT;
-		LEFT = new MappedCharToCharIterator(
-			new FilteredCharIterator(
-				new CharSequenceIterator(cs),
+		final ICharListIterable ITERABLE;
+		ITERABLE = new MappedCharToCharListIterable(
+			new FilteredCharListIterable(
+				new CharSequenceIterable(cs),
 				(c) -> Character.isLetter(c)
 			),
 			(c) -> Character.toLowerCase(c)
 		);
-		RIGHT = new MappedCharToCharIterator(
-			new FilteredCharIterator(
-				new ReverseCharSequenceIterator(cs),
-				(c) -> Character.isLetter(c)
-			),
-			(c) -> Character.toLowerCase(c)
-		);
-		return isPalindrome(LEFT, RIGHT);
+		return isPalindrome(ITERABLE);
 	}
 
-	public static boolean isPalindrome(final ICharIterator left, final ICharIterator right) {
+	public static boolean isPalindrome(final ICharListIterable iterable) {
 		boolean isSearching = true;
+		final ICharIterator LEFT = iterable.iterator();
+		final ICharIterator RIGHT = iterable.reverseIterator();
 
 		for (;
-			isSearching && left.isValid() && right.isValid()
-				&& (left.Index() <= right.Index());
-			left.Next(), right.Next()
+			isSearching && LEFT.isValid() && RIGHT.isValid()
+				&& (LEFT.Index() <= RIGHT.Index());
+			LEFT.Next(), RIGHT.Next()
 		) {
-			System.out.println(left.Index() + "," + right.Index());
-			System.out.println(left.Current() + "," + right.Current());
-			if (left.Current() != right.Current()) {
+			System.out.println(LEFT.Index() + "," + RIGHT.Index());
+			System.out.println(LEFT.Current() + "," + RIGHT.Current());
+			if (LEFT.Current() != RIGHT.Current()) {
 				isSearching = false;
 			}
 		}
