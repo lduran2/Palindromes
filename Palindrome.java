@@ -14,7 +14,7 @@ public enum Palindrome {
 	public static boolean isPalindrome(final CharSequence cs) {
 		final ICharListIterable ITERABLE;
 		ITERABLE = new MappedCharToCharListIterable(
-			new FilteredCharListIterable(
+			new ICharListIterable.Filter(
 				new CharSequenceIterable(cs),
 				(c) -> Character.isLetter(c)
 			),
