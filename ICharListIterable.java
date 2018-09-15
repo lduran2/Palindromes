@@ -43,11 +43,11 @@ public interface ICharListIterable {
 		}
 
 		public ICharIterator iterator() {
-			return new MappedCharToCharIterator(this.BACKING.iterator(), this.FUNCTION);
+			return new ICharIterator.MapToChars(this.BACKING.iterator(), this.FUNCTION);
 		}
 
 		public ICharIterator reverseIterator() {
-			return new MappedCharToCharIterator(this.BACKING.reverseIterator(), this.FUNCTION);
+			return new ICharIterator.MapToChars(this.BACKING.reverseIterator(), this.FUNCTION);
 		}
 
 	}
