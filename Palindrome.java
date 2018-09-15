@@ -13,13 +13,14 @@ public enum Palindrome {
 
 	public static boolean isPalindrome(final CharSequence cs) {
 		final ICharListIterable ITERABLE;
-		ITERABLE = new MappedCharToCharListIterable(
-			new ICharListIterable.Filter(
-				new CharSequenceIterable(cs),
-				(c) -> Character.isLetter(c)
-			),
-			(c) -> Character.toLowerCase(c)
-		);
+		ITEABLE = new ICharListerIterable.Null();
+		// ITERABLE = new MappedCharToCharListIterable(
+			// new ICharListIterable.Filter(
+				// new CharSequenceIterable(cs),
+				// (c) -> Character.isLetter(c)
+			// ),
+			// (c) -> Character.toLowerCase(c)
+		// );
 		return isPalindrome(ITERABLE);
 	}
 
